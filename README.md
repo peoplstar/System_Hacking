@@ -132,3 +132,8 @@ Text 영역 : 우리가 작성한 소스 코드, 시스템이 알아들을 수 �
 * C언어는 main함수부터 실행하기 되는데 main함수를 불러오게 되면 가장 아래에 RET(return address)가 생성되는데, 특정한 함수가 끝나면 돌아갈 위치를 저장한다. return address를 해커가 임의로 변경하여 공격하는 것이 버퍼오버플로우 등이 있다. RBP란, 스택이 시작하는 베이스 포인터를 뜻하는데, RBP 바로 위부터 데이터에 대한 것이 스택에 쌓이는 것을 알려준다.    
 
 > Debugging
+
+`apt-get install strace`로 툴을 다운받아준다. 디버깅을 하기 위해서 strace 로 시스템콜과 관련한 내용을 살펴보도록 도와주는 도구, 어떠한 프로그램이 있을 때 그것과 유사한 프로그램 만들 때도 사용하는 유용한 도구이다. `strace -ifx ./echo`를 통해 디버깅 과정을 알 수 있다.
+[strace_image]
+
+더욱 구체적이고 좋은 디버깅 툴을 이용할 것인데 이 도구는 깃허브에서 제공한다. `git clone https://github.com/pwndbg/pwndbg` 을 입력하여 pwndbg를 다운받는다. 디버깅할 폴더로 이동하여 `gdb 해당파일이름`을 통해 디버깅을 하게 된다. Breaking point를 `break * _start`와 같이 지정해 `run`으로 실행하고, `ni`라는 명령어로 한줄씩 next instruction 한다.
