@@ -6,7 +6,7 @@
 
 ---
 > Assembly language   
-```
+```ARM Assembly
 // helloworld.s
 section  .data
         msg db "hello world"
@@ -59,3 +59,6 @@ Text 영역 : 우리가 작성한 소스 코드, 시스템이 알아들을 수 있는 실질적인 명령어이
 [compiling_image]  
 리눅스는 기본적으로 프로그램을 실행할 때 스택영역에 다양한 취약점이 있다는 것을 알고 있기 때문에 기본적인 방어체계마련하는데 이러한 것을 다 끈상태로 컴파일을 하도록 만들어주는 명령어이다.
 `stack-boundary=4`를 통해 64bit 운영체제버전으로 컴파일할 수 있게한다. sum.c의 파일을 sum.a의 어셈블리어 코드로 바꿔줄 수 있게 한다.
+
+[stack_frame]   
+C언어는 main함수부터 실행하기 되는데 main함수를 불러오게 되면 가장 아래에 RET(return address)가 생성되는데, 특정한 함수가 끝나면 돌아갈 위치를 저장한다. return address를 해커가 임의로 변경하여 공격하는 것이 버퍼오버플로우 등이 있다. RBP란, 스택이 시작하는 베이스 포인터를 뜻하는데, RBP 바로 위부터 데이터에 대한 것이 스택에 쌓이는 것을 알려준다.    
