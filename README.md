@@ -24,41 +24,76 @@ _start:
         mov rdi, 0
         syscall
 ```
-¾î¼Àºí¸®¾î¶õ, ¿ì¸®°¡ ÈçÈ÷ »ç¿ëÇÏ°í ÀÖ´Â C, C++, python µî °í±Þ ÄÚµå¸¦ ½ÇÇàÇÏ±â À§ÇØ ÄÄÆÄÀÏÀ» ÇÏ°Ô µÇ´Âµ¥ ±×¶§ ÄÄÆÄÀÏ·¯¸¦ ÅëÇØ »ý¼ºµÇ´Â ÄÚµåÀÌ´Ù. ÀÌ ÄÚµå´Â ±â°è Áï, CPU°¡ ÀÌÇØÇÒ ¼ö ÀÖ´Â ÇüÅÂ·Î ¹ø¿ªµÇ´Â °ÍÀÌ´Ù.
+ì–´ì…ˆë¸”ë¦¬ì–´ëž€, ìš°ë¦¬ê°€ í”ížˆ ì‚¬ìš©í•˜ê³  ìžˆëŠ” C, C++, python ë“± ê³ ê¸‰ ì½”ë“œë¥¼ ì‹¤í–‰í•˜ê¸° ìœ„í•´ ì»´íŒŒì¼ì„ í•˜ê²Œ ë˜ëŠ”ë° ê·¸ë•Œ ì»´íŒŒì¼ëŸ¬ë¥¼ í†µí•´ ìƒì„±ë˜ëŠ” ì½”ë“œì´ë‹¤. ì´ ì½”ë“œëŠ” ê¸°ê³„ ì¦‰, CPUê°€ ì´í•´í•  ìˆ˜ ìžˆëŠ” í˜•íƒœë¡œ ë²ˆì—­ë˜ëŠ” ê²ƒì´ë‹¤.
 
-* À§ ¾î¼Àºí¸®¾î¸¦ ½ÇÇàÇÏ±â À§ÇØ¼­ Kali LINUX¿¡¼­´Â `nasm -f elf64 -o helloworld.o helloworld.s` ¸¦ ÅëÇØ 'hellworld.o' ¶ó´Â ¸ñÀû ÄÚµå·Î º¯Çü½ÃÅ°¸é ½ÇÇà ÇÁ·Î±×·¥ÀÌ »ý¼ºµÈ´Ù.
+* ìœ„ ì–´ì…ˆë¸”ë¦¬ì–´ë¥¼ ì‹¤í–‰í•˜ê¸° ìœ„í•´ì„œ Kali LINUXì—ì„œëŠ” `nasm -f elf64 -o helloworld.o helloworld.s` ë¥¼ í†µí•´ 'hellworld.o' ë¼ëŠ” ëª©ì  ì½”ë“œë¡œ ë³€í˜•ì‹œí‚¤ë©´ ì‹¤í–‰ í”„ë¡œê·¸ëž¨ì´ ìƒì„±ëœë‹¤.
 
 > Register & System call   
 
-64ºñÆ® È¯°æ¿¡¼­ ÄÄÇ»ÅÍ´Â ½Ã½ºÅÛ ±¸Á¶, ·¹Áö½ºÅÍ¸¦ ¾î¶»°Ô ºÒ·¯¿À´ÂÁö¿¡ ´ëÇØ MICROSOFT»ç¿¡¼­ ÀÚ¼¼È÷ ¼³¸íÇØµÎ¾ú´Ù. ¾î¼Àºí¸®¾î¿¡¼­ ÀÌ¿ëÇÏ´Â ·¹Áö½ºÅÍÀÇ ÀÌ¸§°ú ¸Þ¸ð¸®´Â ¾î¶»°Ô µÇ´ÂÁö ÀÚ¼¼È÷ ¾Ë°í½ÍÀ¸¸é È®ÀÎÇØº¸±æ ¹Ù¶ø´Ï´Ù. 
+64ë¹„íŠ¸ í™˜ê²½ì—ì„œ ì»´í“¨í„°ëŠ” ì‹œìŠ¤í…œ êµ¬ì¡°, ë ˆì§€ìŠ¤í„°ë¥¼ ì–´ë–»ê²Œ ë¶ˆëŸ¬ì˜¤ëŠ”ì§€ì— ëŒ€í•´ MICROSOFTì‚¬ì—ì„œ ìžì„¸ížˆ ì„¤ëª…í•´ë‘ì—ˆë‹¤. ì–´ì…ˆë¸”ë¦¬ì–´ì—ì„œ ì´ìš©í•˜ëŠ” ë ˆì§€ìŠ¤í„°ì˜ ì´ë¦„ê³¼ ë©”ëª¨ë¦¬ëŠ” ì–´ë–»ê²Œ ë˜ëŠ”ì§€ ìžì„¸ížˆ ì•Œê³ ì‹¶ìœ¼ë©´ í™•ì¸í•´ë³´ê¸¸ ë°”ëžë‹ˆë‹¤. 
 [MICROSOFT](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)
 
-* rax : °¡Àå Áß¿äÇÑ ·¹Áö½ºÅÍ Áß ÇÏ³ª, ½Ã½ºÅÛ ÄÝÀÇ ½ÇÁúÀûÀÎ ¹øÈ£, ÇÔ¼öÀÇ °á°ú°¡ ´ã±â´Â °÷
-* rbx : º£ÀÌ½º ·¹Áö½ºÅÍ, ¸Þ¸ð¸® ÁÖ¼Ò¸¦ ÁöÁ¤ÇØÁÖ´Â °÷
-* rcx : Ä«¿îÅÍ ·¹Áö½ºÅÍ, ¹Ýº¹¹®¿¡ ÁÖ·Î »ç¿ë
-* rdx : µ¥ÀÌÅÍ ·¹Áö½ºÅÍ, ¿¬»ê¼öÇà    
-  __<À§ 4°³ÀÇ ·¹Áö½ºÅÍ¸¦ ÅëÆ²¾î µ¥ÀÌÅÍ ·¹Áö½ºÅÍ¶ó ÄªÇÔ.>__
-* rsi : ¸Þ¸ð¸®¸¦ ÀÌµ¿ÇÏ°Å³ª ºñ±³ÇÒ ¶§ Ãâ¹ßÁö ÁÖ¼Ò
-* rdi : ¸Þ¸ð¸®¸¦ ÀÌµ¿ÇÏ°Å³ª ºñ±³ÇÒ ¶§ ¸ñÀûÁö ÁÖ¼Ò
-* rbp : ÇÔ¼öÀÇ ÆÄ¶ó¹ÌÅÍ³ª º¯¼öÀÇ ÁÖ¼Ò
-* rsp : ½ºÅÃ¿¡ ´ëÇÑ »ðÀÔ ¹× »èÁ¦ ¸í·É¿¡ ÀÇÇØ¼­ º¯°æµÇ´Â topÀÇ ÁÖ¼Ò   
+* rax : ê°€ìž¥ ì¤‘ìš”í•œ ë ˆì§€ìŠ¤í„° ì¤‘ í•˜ë‚˜, ì‹œìŠ¤í…œ ì½œì˜ ì‹¤ì§ˆì ì¸ ë²ˆí˜¸, í•¨ìˆ˜ì˜ ê²°ê³¼ê°€ ë‹´ê¸°ëŠ” ê³³
+* rbx : ë² ì´ìŠ¤ ë ˆì§€ìŠ¤í„°, ë©”ëª¨ë¦¬ ì£¼ì†Œë¥¼ ì§€ì •í•´ì£¼ëŠ” ê³³
+* rcx : ì¹´ìš´í„° ë ˆì§€ìŠ¤í„°, ë°˜ë³µë¬¸ì— ì£¼ë¡œ ì‚¬ìš©
+* rdx : ë°ì´í„° ë ˆì§€ìŠ¤í„°, ì—°ì‚°ìˆ˜í–‰    
+  __<ìœ„ 4ê°œì˜ ë ˆì§€ìŠ¤í„°ë¥¼ í†µí‹€ì–´ ë°ì´í„° ë ˆì§€ìŠ¤í„°ë¼ ì¹­í•¨.>__
+* rsi : ë©”ëª¨ë¦¬ë¥¼ ì´ë™í•˜ê±°ë‚˜ ë¹„êµí•  ë•Œ ì¶œë°œì§€ ì£¼ì†Œ
+* rdi : ë©”ëª¨ë¦¬ë¥¼ ì´ë™í•˜ê±°ë‚˜ ë¹„êµí•  ë•Œ ëª©ì ì§€ ì£¼ì†Œ
+* rbp : í•¨ìˆ˜ì˜ íŒŒë¼ë¯¸í„°ë‚˜ ë³€ìˆ˜ì˜ ì£¼ì†Œ
+* rsp : ìŠ¤íƒì— ëŒ€í•œ ì‚½ìž… ë° ì‚­ì œ ëª…ë ¹ì— ì˜í•´ì„œ ë³€ê²½ë˜ëŠ” topì˜ ì£¼ì†Œ   
 
-Syscall °°Àº °æ¿ì´Â Google¿¡ __64bit system call table__ À» °Ë»öÇÏ¸é ÀÚ¼¼È÷ ¼³¸íµÇ¾îÀÖ´Ù.
+Syscall ê°™ì€ ê²½ìš°ëŠ” Googleì— __64bit system call table__ ì„ ê²€ìƒ‰í•˜ë©´ ìžì„¸ížˆ ì„¤ëª…ë˜ì–´ìžˆë‹¤.
  
 > Memory 
  
-[memory_image] Ãß°¡ÇÒ ¿¹Á¤
-»çÁøÀº ¿î¿µÃ¼Á¦ 32bit ±âÁØÀÇ ¸Þ¸ð¸®ÀÌ´Ù. 64bitÀÇ ¸Þ¸ð¸® Å©±â´Â 2^64-1ÀÌ´Ù
+[memory_image] ì¶”ê°€í•  ì˜ˆì •   
+ì‚¬ì§„ì€ ìš´ì˜ì²´ì œ 32bit ê¸°ì¤€ì˜ ë©”ëª¨ë¦¬ì´ë‹¤. 64bitì˜ ë©”ëª¨ë¦¬ í¬ê¸°ëŠ” 2^64-1ì´ë‹¤
 
-Stack ¿µ¿ª : ¼±ÀÔ¼±ÃâÀÇ °³³ä(FIFO), ÇÔ¼ö ¹× ÇÔ¼ö Áö¿ªº¯¼ö µî È£ÃâÇÒ ¶§¸¶´Ù Á¤º¸°¡ ½×ÀÎ´Ù.   
-Heap ¿µ¿ª : µ¿ÀûÀ¸·Î ÇÒ´çµÇ´Â º¯¼ö, C¾ð¾îÀÇ malloc()ÇÔ¼ö°ú °°Àº °ÍÀ¸·Î ÇÒ´ç ÇÒ ¶§ ÀúÀåµÇ´Â °ø°£   
-BSS ¿µ¿ª : ÇÁ·Î±×·¥¿¡¼­ »ç¿ëµÉ º¯¼öµéÀÌ ½ÇÁ¦·Î À§Ä¡ÇÏ´Â ¿µ¿ª, ÃÊ±âÈ­ÇÏÁö ¾ÊÀº º¯¼ö   
-Data ¿µ¿ª : ÃÊ±âÈ­°¡ ÀÌ·ç¾îÁø º¯¼öÀÌ°í, À§ ¾î¼Àºí¸®¾î ÄÚµåÁß `section .data`°¡ ÀÌ ¿µ¿ªÀÌ´Ù.  
-Text ¿µ¿ª : ¿ì¸®°¡ ÀÛ¼ºÇÑ ¼Ò½º ÄÚµå, ½Ã½ºÅÛÀÌ ¾Ë¾ÆµéÀ» ¼ö ÀÖ´Â ½ÇÁúÀûÀÎ ¸í·É¾îÀÌ°í, ÄÄÆÄÀÏ·¯°¡ ¸¸µé¾î ³õÀº ±â°è¾î ÄÚµåÀÌ°í, À§ ¾î¼Àºí¸®¾î ÄÚµåÁß `global_start`·ÎºÎÅÍ `_start:`ÀÇ ÄÚµå°¡ ÇÏ³ª¾¿ µé¾î°¡°Ô µÈ´Ù.
+Stack ì˜ì—­ : ì„ ìž…ì„ ì¶œì˜ ê°œë…(FIFO), í•¨ìˆ˜ ë° í•¨ìˆ˜ ì§€ì—­ë³€ìˆ˜ ë“± í˜¸ì¶œí•  ë•Œë§ˆë‹¤ ì •ë³´ê°€ ìŒ“ì¸ë‹¤.   
+Heap ì˜ì—­ : ë™ì ìœ¼ë¡œ í• ë‹¹ë˜ëŠ” ë³€ìˆ˜, Cì–¸ì–´ì˜ malloc()í•¨ìˆ˜ê³¼ ê°™ì€ ê²ƒìœ¼ë¡œ í• ë‹¹ í•  ë•Œ ì €ìž¥ë˜ëŠ” ê³µê°„   
+BSS ì˜ì—­ : í”„ë¡œê·¸ëž¨ì—ì„œ ì‚¬ìš©ë  ë³€ìˆ˜ë“¤ì´ ì‹¤ì œë¡œ ìœ„ì¹˜í•˜ëŠ” ì˜ì—­, ì´ˆê¸°í™”í•˜ì§€ ì•Šì€ ë³€ìˆ˜   
+Data ì˜ì—­ : ì´ˆê¸°í™”ê°€ ì´ë£¨ì–´ì§„ ë³€ìˆ˜ì´ê³ , ìœ„ ì–´ì…ˆë¸”ë¦¬ì–´ ì½”ë“œì¤‘ `section .data`ê°€ ì´ ì˜ì—­ì´ë‹¤.  
+Text ì˜ì—­ : ìš°ë¦¬ê°€ ìž‘ì„±í•œ ì†ŒìŠ¤ ì½”ë“œ, ì‹œìŠ¤í…œì´ ì•Œì•„ë“¤ì„ ìˆ˜ ìžˆëŠ” ì‹¤ì§ˆì ì¸ ëª…ë ¹ì–´ì´ê³ , ì»´íŒŒì¼ëŸ¬ê°€ ë§Œë“¤ì–´ ë†“ì€ ê¸°ê³„ì–´ ì½”ë“œì´ê³ , ìœ„ ì–´ì…ˆë¸”ë¦¬ì–´ ì½”ë“œì¤‘ `global_start`ë¡œë¶€í„° `_start:`ì˜ ì½”ë“œê°€ í•˜ë‚˜ì”© ë“¤ì–´ê°€ê²Œ ëœë‹¤.
+### _tableë¡œ ë³€í™˜ í• ê²ƒ_ ###
 
 [compiling_image]  
-¸®´ª½º´Â ±âº»ÀûÀ¸·Î ÇÁ·Î±×·¥À» ½ÇÇàÇÒ ¶§ ½ºÅÃ¿µ¿ª¿¡ ´Ù¾çÇÑ Ãë¾àÁ¡ÀÌ ÀÖ´Ù´Â °ÍÀ» ¾Ë°í ÀÖ±â ¶§¹®¿¡ ±âº»ÀûÀÎ ¹æ¾îÃ¼°è¸¶·ÃÇÏ´Âµ¥ ÀÌ·¯ÇÑ °ÍÀ» ´Ù ²ö»óÅÂ·Î ÄÄÆÄÀÏÀ» ÇÏµµ·Ï ¸¸µé¾îÁÖ´Â ¸í·É¾îÀÌ´Ù.
-`stack-boundary=4`¸¦ ÅëÇØ 64bit ¿î¿µÃ¼Á¦¹öÀüÀ¸·Î ÄÄÆÄÀÏÇÒ ¼ö ÀÖ°ÔÇÑ´Ù. sum.cÀÇ ÆÄÀÏÀ» sum.aÀÇ ¾î¼Àºí¸®¾î ÄÚµå·Î ¹Ù²ãÁÙ ¼ö ÀÖ°Ô ÇÑ´Ù.
+* ë¦¬ëˆ…ìŠ¤ëŠ” ê¸°ë³¸ì ìœ¼ë¡œ í”„ë¡œê·¸ëž¨ì„ ì‹¤í–‰í•  ë•Œ ìŠ¤íƒì˜ì—­ì— ë‹¤ì–‘í•œ ì·¨ì•½ì ì´ ìžˆë‹¤ëŠ” ê²ƒì„ ì•Œê³  ìžˆê¸° ë•Œë¬¸ì— ê¸°ë³¸ì ì¸ ë°©ì–´ì²´ê³„ë§ˆë ¨í•˜ëŠ”ë° ì´ëŸ¬í•œ ê²ƒì„ ë‹¤ ëˆìƒíƒœë¡œ ì»´íŒŒì¼ì„ í•˜ë„ë¡ ë§Œë“¤ì–´ì£¼ëŠ” ëª…ë ¹ì–´ì´ë‹¤.
+`stack-boundary=4`ë¥¼ í†µí•´ 64bit ìš´ì˜ì²´ì œë²„ì „ìœ¼ë¡œ ì»´íŒŒì¼í•  ìˆ˜ ìžˆê²Œí•œë‹¤. sum.cì˜ íŒŒì¼ì„ sum.aì˜ ì–´ì…ˆë¸”ë¦¬ì–´ ì½”ë“œë¡œ ë°”ê¿”ì¤„ ìˆ˜ ìžˆê²Œ í•œë‹¤.
 
 [stack_frame]   
-C¾ð¾î´Â mainÇÔ¼öºÎÅÍ ½ÇÇàÇÏ±â µÇ´Âµ¥ mainÇÔ¼ö¸¦ ºÒ·¯¿À°Ô µÇ¸é °¡Àå ¾Æ·¡¿¡ RET(return address)°¡ »ý¼ºµÇ´Âµ¥, Æ¯Á¤ÇÑ ÇÔ¼ö°¡ ³¡³ª¸é µ¹¾Æ°¥ À§Ä¡¸¦ ÀúÀåÇÑ´Ù. return address¸¦ ÇØÄ¿°¡ ÀÓÀÇ·Î º¯°æÇÏ¿© °ø°ÝÇÏ´Â °ÍÀÌ ¹öÆÛ¿À¹öÇÃ·Î¿ì µîÀÌ ÀÖ´Ù. RBP¶õ, ½ºÅÃÀÌ ½ÃÀÛÇÏ´Â º£ÀÌ½º Æ÷ÀÎÅÍ¸¦ ¶æÇÏ´Âµ¥, RBP ¹Ù·Î À§ºÎÅÍ µ¥ÀÌÅÍ¿¡ ´ëÇÑ °ÍÀÌ ½ºÅÃ¿¡ ½×ÀÌ´Â °ÍÀ» ¾Ë·ÁÁØ´Ù.    
+* Cì–¸ì–´ëŠ” mainí•¨ìˆ˜ë¶€í„° ì‹¤í–‰í•˜ê¸° ë˜ëŠ”ë° mainí•¨ìˆ˜ë¥¼ ë¶ˆëŸ¬ì˜¤ê²Œ ë˜ë©´ ê°€ìž¥ ì•„ëž˜ì— RET(return address)ê°€ ìƒì„±ë˜ëŠ”ë°, íŠ¹ì •í•œ í•¨ìˆ˜ê°€ ëë‚˜ë©´ ëŒì•„ê°ˆ ìœ„ì¹˜ë¥¼ ì €ìž¥í•œë‹¤. return addressë¥¼ í•´ì»¤ê°€ ìž„ì˜ë¡œ ë³€ê²½í•˜ì—¬ ê³µê²©í•˜ëŠ” ê²ƒì´ ë²„í¼ì˜¤ë²„í”Œë¡œìš° ë“±ì´ ìžˆë‹¤. RBPëž€, ìŠ¤íƒì´ ì‹œìž‘í•˜ëŠ” ë² ì´ìŠ¤ í¬ì¸í„°ë¥¼ ëœ»í•˜ëŠ”ë°, RBP ë°”ë¡œ ìœ„ë¶€í„° ë°ì´í„°ì— ëŒ€í•œ ê²ƒì´ ìŠ¤íƒì— ìŒ“ì´ëŠ” ê²ƒì„ ì•Œë ¤ì¤€ë‹¤.    
+
+> Echo Program   
+
+ì—ì½” í”„ë¡œê·¸ëž¨ì´ëž€, ìžì‹ ì´ ìž…ë ¥í•  ë¬¸ìžì—´ì„ ê·¸ëŒ€ë¡œ ì¶œë ¥í•´ì£¼ëŠ” í”„ë¡œê·¸ëž¨ì´ë‹¤. ì•„ëž˜ì˜ ì†ŒìŠ¤ ì¤‘
+`xor rax, rax` = `mov rax, 0` ì™€ ê°™ì€ ì˜ë¯¸ë¥¼ ë‚˜íƒ€ë‚´ê³  `sub rsp, 64`ë¥¼ í†µí•´ RSPë¥¼ 64ë§Œí¼ ëº€ë‹¤ëŠ” ê²ƒì€ ìŠ¤íƒì—ì„œ RSP ìœ„ë¡œ 64ë§Œí¼ì˜ ê³µê°„ì„ í™•ë³´í•œë‹¤ëŠ” ì˜ë¯¸í•˜ê²Œ ëœë‹¤. ìœ„ ì–¸ê¸‰í•œ ë§ˆì´í¬ë¡œì†Œí”„íŠ¸ ì‚¬ì´íŠ¸ì—ì„œ ë ˆì§€ìŠ¤í„° ì•„í‚¤í…ì³í‘œë¥¼ ë³´ë©´ ì•Œê² ì§€ë§Œ, `rax = 0` ì¼ ë•Œ rdiëŠ” ë””ìŠ¤í¬ë¥¼ ì½ê²Œ ë˜ê³  `rax = 1` ì¼ë•Œ rdiëŠ” ë””ìŠ¤í¬ë¥¼ ì“°ê²Œ ëœë‹¤.
+
+```ARM Assembly
+section .text
+        global _start
+
+_start:
+        xor rax, rax
+        mov rbx, rax
+        mov rcx, rax
+        mov rdx, rax
+
+        sub rsp, 64
+        mov rdi, 0
+        mov rsi, rsp
+        mov rdx, 63
+
+        syscall
+
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, rsp
+        mov rdx, 63
+
+        syscall
+
+        mov rax, 60
+
+        syscall
+```
