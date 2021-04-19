@@ -7,7 +7,7 @@
 ---
 > Assembly language   
 ```ARM Assembly
-// helloworld.s
+; helloworld.s
 section  .data
         msg db "hello world"
 
@@ -27,6 +27,73 @@ _start:
 어셈블리어란, 우리가 흔히 사용하고 있는 C, C++, python 등 고급 코드를 실행하기 위해 컴파일을 하게 되는데 그때 컴파일러를 통해 생성되는 코드이다. 이 코드는 기계 즉, CPU가 이해할 수 있는 형태로 번역되는 것이다.
 
 * 위 어셈블리어를 실행하기 위해서 Kali LINUX에서는 `nasm -f elf64 -o helloworld.o helloworld.s` 를 통해 'hellworld.o' 라는 목적 코드로 변형시키면 실행 프로그램이 생성된다.
+
+
+>반복문  
+```ARM Assembly
+section .data
+        msg db "A"
+
+section .text
+        global _start
+
+_start:
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, msg
+        mov rdx, 1
+        mov r10, 1
+
+again:
+        cmp r10, 100
+        je done
+        syscall
+        mov rax, 1
+        inc r10
+        jmp again
+
+done:
+        mov rax, 60
+        mov rdi, 0
+        syscall
+```
+잘 쓰이지 않는 r10의 레지스터 값을 이용하는데 cmp 함수를 통해 r10이 100이 되면 je : 위 두 변수의 값이 동일할 경우 실행 done이란 함수로 가도록 하고 그렇지 않다면 rax = 1 이므로 syscall 할 때 A가 출력되게 한다. rax는 함수 실행 후 그 함수의 결과가 rax에 담기기 때문에 다시 rax, 1로 출력할 수 있게 한다.
+inc r10 = ++r10
+
+> Echo Program   
+
+에코 프로그램이란, 자신이 입력할 문자열을 그대로 출력해주는 프로그램이다. 아래의 소스 중
+`xor rax, rax` = `mov rax, 0` 와 같은 의미를 나타내고 `sub rsp, 64`를 통해 RSP를 64만큼 뺀다는 것은 스택에서 RSP 위로 64만큼의 공간을 확보한다는 의미하게 된다. 위 언급한 마이크로소프트 사이트에서 레지스터 아키텍쳐표를 보면 알겠지만, `rax = 0` 일 때 rdi는 디스크를 읽게 되고 `rax = 1` 일때 rdi는 디스크를 쓰게 된다.
+
+```ARM Assembly
+section .text
+        global _start
+
+_start:
+        xor rax, rax
+        mov rbx, rax
+        mov rcx, rax
+        mov rdx, rax
+
+        sub rsp, 64
+        mov rdi, 0
+        mov rsi, rsp
+        mov rdx, 63
+
+        syscall ; 디스크를 읽어오는 과정
+
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, rsp
+        mov rdx, 63
+
+        syscall ; 디스크를 쓰는 과정
+
+        mov rax, 60
+
+        syscall ; 프로그램 종료
+```   
+`nasm -f elf64 -o echo.o echo.s` 를 통해 목적 코드로 변경하고 `ld -o echo echo.o`로 목적 코드를 실행프로그램으로 만들어 준다.
 
 > Register & System call   
 
@@ -64,36 +131,3 @@ Text 영역 : 우리가 작성한 소스 코드, 시스템이 알아들을 수 �
 [stack_frame]   
 * C언어는 main함수부터 실행하기 되는데 main함수를 불러오게 되면 가장 아래에 RET(return address)가 생성되는데, 특정한 함수가 끝나면 돌아갈 위치를 저장한다. return address를 해커가 임의로 변경하여 공격하는 것이 버퍼오버플로우 등이 있다. RBP란, 스택이 시작하는 베이스 포인터를 뜻하는데, RBP 바로 위부터 데이터에 대한 것이 스택에 쌓이는 것을 알려준다.    
 
-> Echo Program   
-
-에코 프로그램이란, 자신이 입력할 문자열을 그대로 출력해주는 프로그램이다. 아래의 소스 중
-`xor rax, rax` = `mov rax, 0` 와 같은 의미를 나타내고 `sub rsp, 64`를 통해 RSP를 64만큼 뺀다는 것은 스택에서 RSP 위로 64만큼의 공간을 확보한다는 의미하게 된다. 위 언급한 마이크로소프트 사이트에서 레지스터 아키텍쳐표를 보면 알겠지만, `rax = 0` 일 때 rdi는 디스크를 읽게 되고 `rax = 1` 일때 rdi는 디스크를 쓰게 된다.
-
-```ARM Assembly
-section .text
-        global _start
-
-_start:
-        xor rax, rax
-        mov rbx, rax
-        mov rcx, rax
-        mov rdx, rax
-
-        sub rsp, 64
-        mov rdi, 0
-        mov rsi, rsp
-        mov rdx, 63
-
-        syscall
-
-        mov rax, 1
-        mov rdi, 1
-        mov rsi, rsp
-        mov rdx, 63
-
-        syscall
-
-        mov rax, 60
-
-        syscall
-```
