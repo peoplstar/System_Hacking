@@ -188,8 +188,8 @@ Syscall 같은 경우는 Google에 __64bit system call table__ 을 검색하면 
  
 > Memory 
  
-![memory_structure](https://user-images.githubusercontent.com/78135526/147746859-3ce42108-4d18-4644-890b-dcffe9201d3f.png) {: width="200" height="200"}
-![stack_frame](https://user-images.githubusercontent.com/78135526/147746893-26051ada-80ca-456b-8bc9-aa6b55a2acdd.png) {: width="200" height="200"}
+![memory_structure](https://user-images.githubusercontent.com/78135526/147746859-3ce42108-4d18-4644-890b-dcffe9201d3f.png){: width="200" height="200"}
+![stack_frame](https://user-images.githubusercontent.com/78135526/147746893-26051ada-80ca-456b-8bc9-aa6b55a2acdd.png){: width="200" height="200"}
 
 
 사진은 운영체제 32bit 기준의 메모리이다. 64bit의 메모리 크기는 2^64-1이다
