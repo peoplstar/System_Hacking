@@ -188,7 +188,8 @@ Syscall 같은 경우는 Google에 __64bit system call table__ 을 검색하면 
  
 > Memory 
  
-[memory_image] 추가할 예정   
+![memory_structure](https://user-images.githubusercontent.com/78135526/147746859-3ce42108-4d18-4644-890b-dcffe9201d3f.png) 
+![stack_frame](https://user-images.githubusercontent.com/78135526/147746893-26051ada-80ca-456b-8bc9-aa6b55a2acdd.png) 
 사진은 운영체제 32bit 기준의 메모리이다. 64bit의 메모리 크기는 2^64-1이다
 
 Stack 영역 : 선입선출의 개념(FIFO), 함수 및 함수 지역변수 등 호출할 때마다 정보가 쌓인다.   
