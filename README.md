@@ -193,15 +193,17 @@ Syscall 같은 경우는 Google에 __64bit system call table__ 을 검색하면 
 
 
 사진은 운영체제 32bit 기준의 메모리이다. 64bit의 메모리 크기는 2^64-1이다
-
+<!-- 
+        ### _table로 변환 할것_ ###
+-->
 Stack 영역 : 선입선출의 개념(FIFO), 함수 및 함수 지역변수 등 호출할 때마다 정보가 쌓인다.   
 Heap 영역 : 동적으로 할당되는 변수, C언어의 malloc()함수과 같은 것으로 할당 할 때 저장되는 공간   
 BSS 영역 : 프로그램에서 사용될 변수들이 실제로 위치하는 영역, 초기화하지 않은 변수   
 Data 영역 : 초기화가 이루어진 변수이고, 위 어셈블리어 코드중 `section .data`가 이 영역이다.  
 Text 영역 : 우리가 작성한 소스 코드, 시스템이 알아들을 수 있는 실질적인 명령어이고, 컴파일러가 만들어 놓은 기계어 코드이고, 위 어셈블리어 코드중 `global_start`로부터 `_start:`의 코드가 하나씩 들어가게 된다.
-### _table로 변환 할것_ ###
 
-<img src="https://user-images.githubusercontent.com/78135526/147747405-b417dee3-f354-4d45-a07e-dfee606d9b15.png"  width="250" height="300">
+
+<img src="https://user-images.githubusercontent.com/78135526/147747405-b417dee3-f354-4d45-a07e-dfee606d9b15.png">
 
 * 리눅스는 기본적으로 프로그램을 실행할 때 스택영역에 다양한 취약점이 있다는 것을 알고 있기 때문에 기본적인 방어체계마련하는데 이러한 것을 다 끈상태로 컴파일을 하도록 만들어주는 명령어이다.
 `stack-boundary=4`를 통해 64bit 운영체제버전으로 컴파일할 수 있게한다. sum.c의 파일을 sum.a의 어셈블리어 코드로 바꿔줄 수 있게 한다.
@@ -214,7 +216,7 @@ Text 영역 : 우리가 작성한 소스 코드, 시스템이 알아들을 수 �
 
 `apt-get install strace`로 툴을 다운받아준다. 디버깅을 하기 위해서 strace 로 시스템콜과 관련한 내용을 살펴보도록 도와주는 도구, 어떠한 프로그램이 있을 때 그것과 유사한 프로그램 만들 때도 사용하는 유용한 도구이다. `strace -ifx ./echo`를 통해 디버깅 과정을 알 수 있다.
 
-<img src="https://user-images.githubusercontent.com/78135526/147747409-ecb79500-d919-4738-bc95-93a899986b0e.png"  width="250" height="300">
+<img src="https://user-images.githubusercontent.com/78135526/147747409-ecb79500-d919-4738-bc95-93a899986b0e.png">
 
 더욱 구체적이고 좋은 디버깅 툴을 이용할 것인데 이 도구는 깃허브에서 제공한다. `git clone https://github.com/pwndbg/pwndbg` 을 입력하여 pwndbg를 다운받는다. 디버깅할 폴더로 이동하여 `gdb 해당파일이름`을 통해 디버깅을 하게 된다. Breaking point를 `break * _start`와 같이 지정해 `run`으로 실행하고, `ni`라는 명령어로 한줄씩 next instruction 한다.
 
