@@ -189,10 +189,10 @@ Syscall 같은 경우는 Google에 __64bit system call table__ 을 검색하면 
 > Memory 
  
 <p align="center">
-        <img src="https://user-images.githubusercontent.com/78135526/147747144-f2fedaab-9729-4f26-8e74-24c060363a5a.png"  width="200" height="400"/>
+        <img src="https://user-images.githubusercontent.com/78135526/147747144-f2fedaab-9729-4f26-8e74-24c060363a5a.png"  width="200" height="300"/>
 </p>
 
-사진은 운영체제 32bit 기준의 메모리이다. 64bit의 메모리 크기는 2^64-1이다
+* (사진은 운영체제 32bit 기준의 메모리이다. 64bit의 메모리 크기는 2^64-1이다)
 
 영역 | 내용
 ---- | ---- 
@@ -202,24 +202,30 @@ BSS | 프로그램에서 사용될 변수들이 실제로 위치하는 영역, �
 DATA | 초기화가 이루어진 변수이고, 위 어셈블리어 코드중 `section .data`가 이 영역이다.  
 TEXT | 우리가 작성한 소스 코드, 시스템이 알아들을 수 있는 실질적인 명령어이고, 컴파일러가 만들어 놓은 기계어 코드이고, 위 어셈블리어 코드 중 `global_start`로부터 `_start:`의 코드가 하나씩 들어가게 된다. 
 
+
+
 <p align="center">
         <img src="https://user-images.githubusercontent.com/78135526/147747405-b417dee3-f354-4d45-a07e-dfee606d9b15.png">
 </p>
+
 * 리눅스는 기본적으로 프로그램을 실행할 때 스택영역에 다양한 취약점이 있다는 것을 알고 있기 때문에 기본적인 방어체계마련하는데 이러한 것을 다 끈상태로 컴파일을 하도록 만들어주는 명령어이다.
 `stack-boundary=4`를 통해 64bit 운영체제버전으로 컴파일할 수 있게한다. sum.c의 파일을 sum.a의 어셈블리어 코드로 바꿔줄 수 있게 한다.
+
 <p align="center">
         <img src="https://user-images.githubusercontent.com/78135526/147747139-0beed467-d799-41c9-96a4-7e53972ee4fd.png"  width="250" height="300"> 
 </p>
+   
 * C언어는 main함수부터 실행하기 되는데 main함수를 불러오게 되면 가장 아래에 RET(return address)가 생성되는데, 특정한 함수가 끝나면 돌아갈 위치를 저장한다. return address를 해커가 임의로 변경하여 공격하는 것이 버퍼오버플로우 등이 있다. RBP란, 스택이 시작하는 베이스 포인터를 뜻하는데, RBP 바로 위부터 데이터에 대한 것이 스택에 쌓이는 것을 알려준다.    
-
+   
 > Debugging
 
 `apt-get install strace`로 툴을 다운받아준다. 디버깅을 하기 위해서 strace 로 시스템콜과 관련한 내용을 살펴보도록 도와주는 도구, 어떠한 프로그램이 있을 때 그것과 유사한 프로그램 만들 때도 사용하는 유용한 도구이다. `strace -ifx ./echo`를 통해 디버깅 과정을 알 수 있다.
 <p align="center">
         <img src="https://user-images.githubusercontent.com/78135526/147747409-ecb79500-d919-4738-bc95-93a899986b0e.png">
 </p>
+   
 더욱 구체적이고 좋은 디버깅 툴을 이용할 것인데 이 도구는 깃허브에서 제공한다. `git clone https://github.com/pwndbg/pwndbg` 을 입력하여 pwndbg를 다운받는다. 디버깅할 폴더로 이동하여 `gdb 해당파일이름`을 통해 디버깅을 하게 된다. Breaking point를 `break * _start`와 같이 지정해 `run`으로 실행하고, `ni`라는 명령어로 한줄씩 next instruction 한다.
-
+   
 >Shell code
 
 명령 Shell을 실행 시켜 해킹을 당하는 서버 컴퓨터를 제어하도록 하는 코드이다.
